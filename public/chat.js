@@ -1,4 +1,6 @@
-let socket = io.connect('http://localhost:4000/');
+// const baseUrl = 'http://localhost:4000/';
+const baseUrl = 'https://chat7654.herokuapp.com/';
+let socket = io.connect(baseUrl);
 
 let message = document.getElementById('message'),
   handle = document.getElementById('handle'),
