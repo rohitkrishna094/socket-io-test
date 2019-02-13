@@ -1,7 +1,7 @@
 let express = require('express');
 
 let app = express();
-let server = app.listen(4000, () => {
+let server = app.listen(process.env.PORT || 4000, () => {
   console.log('listening for request on port 4000');
 });
 
