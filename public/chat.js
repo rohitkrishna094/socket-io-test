@@ -8,6 +8,14 @@ let message = document.getElementById('message'),
   output = document.getElementById('output'),
   feedback = document.getElementById('feedback');
 
+// click button on Enter
+message.addEventListener('keyup', e => {
+  // e.preventDefault;
+  if (e.keyCode === 13) {
+    btn.click();
+  }
+});
+
 btn.addEventListener('click', () => {
   socket.emit('chat', {
     message: message.value,
