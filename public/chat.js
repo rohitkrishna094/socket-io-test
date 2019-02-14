@@ -8,6 +8,7 @@ let message = document.getElementById('message'),
   output = document.getElementById('output'),
   feedback = document.getElementById('feedback');
 
+handle.placeholder = 'User-' + Math.floor(Math.random() * 60000);
 // click button on Enter
 message.addEventListener('keyup', e => {
   // e.preventDefault;
@@ -16,12 +17,17 @@ message.addEventListener('keyup', e => {
   }
 });
 
-btn.addEventListener('click', () => {
-  socket.emit('chat', {
-    message: message.value,
-    handle: handle.value
-  });
-  message.value = '';
+btn.addEventListener('click', e => {
+  if (message.value.length !== 0) {
+    message.classList.remove('error');
+    socket.emit('chat', {
+      message: message.value,
+      handle: handle.value.length === 0 ? handle.placeholder : handle.value
+    });
+    message.value = '';
+  } else {
+    message.classList.add('error');
+  }
 });
 
 message.addEventListener('keypress', () => {
@@ -34,5 +40,6 @@ socket.on('chat', data => {
 });
 
 socket.on('typing', function(data) {
-  feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+  // feedback.innerHTML = '<p><em>' + data + ' is typing a message...</em></p>';
+  feedback.innerHTML = '<p><em>' + 'Someone' + ' is typing a message...</em></p>';
 });
